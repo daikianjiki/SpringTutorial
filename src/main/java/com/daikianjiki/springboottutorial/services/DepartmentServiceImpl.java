@@ -1,18 +1,20 @@
 package com.daikianjiki.springboottutorial.services;
 
 import com.daikianjiki.springboottutorial.entities.Department;
-import com.daikianjiki.springboottutorial.repos.DepartmentRepos;
+import com.daikianjiki.springboottutorial.error.DepartmentNotFoundException;
+import com.daikianjiki.springboottutorial.repos.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
-    private DepartmentRepos departmentRepos;
+    private DepartmentRepo departmentRepos;
     @Override
     public Department saveDepartment(Department department) {
         return departmentRepos.save(department);
@@ -24,8 +26,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department fetchDepartmentById(Long departmentId) {
-        return departmentRepos.findById(departmentId).get();
+    public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+        Optional<Department> department = departmentRepos.findById(departmentId);
+        if (!department.isPresent()) {
+            throw new DepartmentNotFoundException(("Department not available"));
+        }
+        return department.get();
     }
 
     @Override
