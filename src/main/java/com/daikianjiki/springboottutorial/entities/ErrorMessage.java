@@ -1,4 +1,4 @@
-package com.daikianjiki.springboottutorial.repos;
+package com.daikianjiki.springboottutorial.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

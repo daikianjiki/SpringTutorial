@@ -1,6 +1,6 @@
 package com.daikianjiki.springboottutorial.error;
 
-import com.daikianjiki.springboottutorial.repos.ErrorMessage;
+import com.daikianjiki.springboottutorial.entities.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
